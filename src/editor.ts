@@ -202,7 +202,7 @@ export class BoilerplateCardEditor extends LitElement implements LovelaceCardEdi
           )}
         >
           <ha-switch
-            .checked="${this._severity !== undefined}"
+            .checked="${this.config?.severities !== undefined}"
             @change="${this._toggleSeverity}"
           ></ha-switch
         ></ha-formfield>
