@@ -45,10 +45,9 @@ export class CustomGaugeCard extends LitElement {
     return document.createElement('custom-gauge-card-editor');
   }
 
-  public static getStubConfig(): object {
-    return {};
+  public static getStubConfiggetStubConfig(): any {
+    return { type: "gauge", entity: "" };
   }
-
 
   // https://lit-element.polymer-project.org/guide/properties
   @property({ attribute: false }) public hass!: HomeAssistant;
@@ -56,7 +55,7 @@ export class CustomGaugeCard extends LitElement {
   @state() private config!: CustomGaugeCardConfig;
 
   // https://lit-element.polymer-project.org/guide/properties#accessors-custom
-  public setConfig(config: CustomGaugeCardConfig): void {
+  public async setConfig(config: CustomGaugeCardConfig): Promise<void> {
     if (!config) {
       throw new Error(localize('common.invalid_configuration'));
     }
@@ -70,6 +69,11 @@ export class CustomGaugeCard extends LitElement {
       max: 500,
       ...config,
     };
+
+    // if (!customElements.get("ha-gauge")) {
+    //   const cardHelpers = await window!.loadCardHelpers();
+    //   cardHelpers.createCardElement({type: "gauge"});
+    // }
   }
 
   // https://lit-element.polymer-project.org/guide/lifecycle#shouldupdate
@@ -99,7 +103,7 @@ export class CustomGaugeCard extends LitElement {
     if (this.config.valueEntity) {
       value = this.hass.states[this.config.valueEntity].state;
     }
-
+    console.log
     return html`
       <ha-card
         @click=${this._handleAction}
@@ -112,7 +116,7 @@ export class CustomGaugeCard extends LitElement {
           .valueText=${value || undefined}
           .locale=${this.hass.locale}
           .label=${this.config.unit ||
-          this.hass?.states[this.config.entity].attributes
+          this.hass?.states[this.config.valueEntity || this.config.entity].attributes
             .unit_of_measurement ||
           ""}
           style=${styleMap({

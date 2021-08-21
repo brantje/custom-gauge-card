@@ -8,6 +8,7 @@
     "runem.lit-plugin",
     "auchenberg.vscode-browser-preview",
     "davidanson.vscode-markdownlint",
-    "redhat.vscode-yaml"
+    "redhat.vscode-yaml",
+    "gruntfuggly.todo-tree"
   ]
 }
