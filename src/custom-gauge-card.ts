@@ -70,10 +70,10 @@ export class CustomGaugeCard extends LitElement {
       ...config,
     };
 
-    // if (!customElements.get("ha-gauge")) {
-    //   const cardHelpers = await window!.loadCardHelpers();
-    //   cardHelpers.createCardElement({type: "gauge"});
-    // }
+    if (!customElements.get("ha-gauge")) {
+      const cardHelpers = await (window as any).loadCardHelpers();
+      cardHelpers.createCardElement({type: "gauge"});
+    }
   }
 
   // https://lit-element.polymer-project.org/guide/lifecycle#shouldupdate
@@ -103,7 +103,7 @@ export class CustomGaugeCard extends LitElement {
     if (this.config.valueEntity) {
       value = this.hass.states[this.config.valueEntity].state;
     }
-    console.log
+
     return html`
       <ha-card
         @click=${this._handleAction}
