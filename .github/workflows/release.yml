@@ -24,7 +24,7 @@ jobs:
 
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: /home/runner/work/boilerplate-card/boilerplate-card/dist/boilerplate-card.js
+          file: /home/runner/work/custom-gauge-card/custom-gauge-card/dist/custom-gauge-card.js
           asset_name: custom-gauge-card.js
           tag: ${{ github.ref }}
           overwrite: true
